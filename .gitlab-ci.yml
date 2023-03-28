@@ -10,9 +10,9 @@ stages:
 
 build_image:
     stage: build
-    image: docker:23.0.1
+    image: docker:latest
     services:
-        - docker:23.0.1-dind
+        - docker:latest-dind
     script:
         - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
         - docker build -t $IMAGE_NAME:$IMAGE_TAG .
