@@ -3,7 +3,7 @@ image: python:latest
 variables:
     IMAGE_NAME: kejsiblushi/djangoapp
     IMAGE_TAG: latest
-    DOCKER_TLS_CERTDIT: "/certs"  
+ 
 
 stages:
     - build
@@ -14,6 +14,6 @@ build_image:
     services:
         - docker:23.0.1-dind
     script:
-        - docker login --username $DOCKER_REGISTRY_USER --password $DOCKER_REGISTRY_PASSWORD
+        - docker login -username $DOCKER_REGISTRY_USER -password $DOCKER_REGISTRY_PASSWORD
         - docker build -t $IMAGE_NAME:$IMAGE_TAG .
         - docker push $IMAGE_NAME:$IMAGE_TAG
