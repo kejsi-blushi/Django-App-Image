@@ -4,7 +4,9 @@ variables:
     IMAGE_NAME: kejsiblushi/djangoapp
     IMAGE_TAG: latest
  
-
+before_script:
+  - docker info
+  
 stages:
     - build
 
