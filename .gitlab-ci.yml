@@ -8,18 +8,23 @@ variables:
 stages:
     -build
 
-build_image :
-  image : docker:latest
-  stage: build
-  services:
-    - docker:dind
+build_image:
 
-  variables:
-   DOCKER_TLS_CERTDIT: "/certs"
+    stage: build
 
-  script:
-      - docker info
-      - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" 
-      - docker build -t  $IMAGE_NAME:$IMAGE_TAG .
-      - docker push $IMAGE_NAME:$IMAGE_TAG-1.0
+    image: docker:23.0.1
+
+    services:
+
+       - docker:23.0.1-dind
+
+    variables:
+
+        DOCKER_TLS_CERTDIT: "/certs"
+
+    script:
+       - docker info
+       - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" 
+       - docker build -t  $IMAGE_NAME:$IMAGE_TAG .
+       - docker push $IMAGE_NAME:$IMAGE_TAG-1.0
 
